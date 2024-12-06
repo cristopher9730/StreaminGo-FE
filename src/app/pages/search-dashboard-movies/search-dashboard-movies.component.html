@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="d-flex justify-content-center align-items-center">
+        <input 
+            class="form-control search-input" 
+            [(ngModel)]="search"
+            (keyup.enter)="filterMovies()"
+            type="text"
+            placeholder="Search Movies">
+        <button (click)="filterMovies()" class="btn btn-dark bg-black">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <a  [routerLink]="['/app/dashboard']" class="btn btn-dark bg-black ml-2">
+            <i class="fa-solid fa-house"></i>
+        </a>
+    </div>
+</div>
+
+<div class="container d-flex flex-wrap mt-4">
+    <!-- List of movie cards -->
+    @for (item of filteredMovieList; track item.id){
+    <app-movie-card 
+        [title]="item.name ?? ''" 
+        [year]="item.realesedYear ?? 0"
+        [category]="item.genre?.name ?? ''" 
+        [url]="'/stream'"
+        [image]="item.imageCover ?? ''"
+        [video]="item.video ?? ''">
+    </app-movie-card>
+    }
+</div>

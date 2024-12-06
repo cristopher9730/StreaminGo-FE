@@ -1,0 +1,41 @@
+.canvas {
+  display: block;
+  height: auto;  // Cambiado de height: 400px a height: auto
+  width: 100%;   // Cambiado de width: 600px a width: 100%
+}
+
+.card-icon {
+  font-size: 1.5rem;
+}
+
+.card-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #21201E;
+}
+
+.card-text {
+  margin-left: 10px;
+  font-size: 1.5rem;
+}
+
+.chart {
+  height: 400px;
+  width: 100%;  // Cambiado de width: 600px a width: 100%
+
+  @media (max-width: 768px) {
+    height: 300px;  // Nuevo: Ajustar altura para pantallas más pequeñas
+  }
+}
+
+@media (max-width: 576px) {
+  .card-body {
+    flex-direction: column;  // Nuevo: Cambiar a columna en pantallas pequeñas
+  }
+
+  .card-text {
+    margin-left: 0;   // Nuevo: Ajustar margen en pantallas pequeñas
+    margin-top: 10px; // Nuevo: Agregar margen superior
+  }
+}

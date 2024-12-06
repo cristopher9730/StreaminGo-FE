@@ -1,0 +1,76 @@
+<div class="card position-relative m-3" style="width: 16rem; height: 20rem;">
+  <img [src]="image" class="card-img" alt="{{title}}">
+
+  <!--Boton like-->
+  <button (click)="toggleLike()" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" type="button"
+    class="btn btn-outline-secondary position-absolute top-0 end-0 m-2">
+    <i [ngClass]="isLiked || isHovered ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
+    <span>{{ likeCount }}</span>
+  </button>
+
+  <div class="play-button position-absolute top-50 start-50 translate-middle">
+    <a [routerLink]="[url, video]" class="btn btn-primary rounded-circle p-3">
+      <i class="fa-solid fa-play"></i>
+    </a>
+  </div>
+  <div class="card-body-overlay position-absolute bottom-0 w-100 text-center p-3">
+    <h5 class="card-title">{{title}}</h5>
+    <p class="card-text">{{year}} | {{category}}</p>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn .btn-info position-absolute top-0 end-0 m-2" data-bs-toggle="modal"
+    [attr.data-bs-target]="'#exampleModal' + movieId">
+      <i class="fa-solid fa-circle-exclamation"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" [id]="'exampleModal' + movieId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content movie-modal-container">
+      <div class="modal-body">
+        <div class="bg-image-container">
+          <img [src]="image" class="img-fluid" alt="Movie Image"> 
+          <div class="content-container">
+            <div class="row">
+              <div class="col-12 d-flex justify-content-end align-items-start">
+                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h5 class="movie-title">{{title}}</h5>
+                <div class="row mb-3">
+                  <div class="col-4 text-white">
+                    <span>{{year}}</span>
+                  </div>
+                  <div class="col-4 text-white">
+                    <span>{{category}}</span>
+                  </div>
+                  <div class="col-4 text-white">
+                    <span>{{time}} min</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 text-white mb-3">
+                    <p>{{description}}</p>
+                  </div>
+                  <div class="col-12">
+                    <div class="btn bg-purple">
+                      <a [routerLink]="[url, video]" class="text-white" style="cursor: pointer;" data-bs-dismiss="modal">
+                        Watch Now
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

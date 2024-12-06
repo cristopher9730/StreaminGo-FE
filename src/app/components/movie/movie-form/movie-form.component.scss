@@ -1,0 +1,15 @@
+.list-group {
+    max-height: 100px;  // Ajusta la altura máxima según tus necesidades
+    overflow-y: auto;   // Habilita el scroll vertical
+    position: absolute; // Posiciona la lista debajo del input
+    z-index: 1000;      // Asegura que la lista esté encima de otros elementos
+  }
+  
+  .list-group-item {
+    cursor: pointer;
+  }
+  
+  .list-group-item:hover {
+    background-color: #f8f9fa;
+  }
+  

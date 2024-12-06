@@ -1,0 +1,49 @@
+<div class="container d-flex justify-content-center">
+    <div class="table-responsive text-white w-75">
+      <table class="table text-white align-middle">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th class="text-center" scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of itemList; track $index) {
+            <tr>
+              <td>{{item.name}}</td>
+              <td class="text-center">
+                <button 
+                  type="button" 
+                  (click)="showDetailModal(item, detailModal)"
+                  class="btn text-white">
+                  <i class="fa-regular fa-pen-to-square"
+                  ></i>
+                </button>
+                <button 
+                  type="button"
+                  (click)="deleteCasting(item);" 
+                  class="btn text-danger">
+                  <i class="fa-regular fa-trash-can"
+                  ></i>
+                </button> 
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="text-center">There are not items to show</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <app-modal #detailModal>
+    <app-casting-form
+      [actorList]="actorService.items$()"
+      [casting]="selectedItem"
+      [action]="'Update casting'"
+      (callParentEvent)="handleFormAction($event)"
+      (closeModal)="detailModal.hide()"
+    />
+  </app-modal>

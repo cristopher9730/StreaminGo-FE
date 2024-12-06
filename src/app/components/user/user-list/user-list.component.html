@@ -1,0 +1,64 @@
+<div class="table-container table-responsive">
+  <div class="header-container d-flex justify-content-between align-items-center mb-2">
+    <div class="user-count">
+      <p>Total de usuarios: {{userList.length}}</p>
+    </div>
+    <div class="search-container">
+      <input 
+        type="text" 
+        [(ngModel)]="search" 
+        (input)="applyFilter()" 
+        placeholder="Buscar usuarios..." 
+        class="form-control search-input"
+      />
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr style="color: white;">
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">email</th>
+        <th scope="col">Created</th>
+        <th scope="col">Updated</th>
+        <th class="text-center" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of userList; track item.id) {
+      <tr style="color: white;">
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.name}}</td>
+        <td>{{item.lastname}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.createdAt | date: 'dd/MM/yyyy HH:mm'}}</td>
+        <td>{{item.updatedAt | date: 'dd/MM/yyyy HH:mm'}}</td>
+        <td>
+          <div class="d-flex justify-content-evenly align-items-center">
+            <button type="button" (click)="showDetail(item, formModal)" class="btn text-white">
+              <i class="fa-regular fa-pen-to-square"
+              ></i>
+            </button>
+            <button type="button" (click)="deleteUser(item)" class="btn text-danger">
+              <i class="fa-regular fa-trash-can"
+              ></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<app-modal size="lg" #formModal>
+  <app-user-form 
+  [user]="currentUser" 
+  [action]="'edit'"
+  [title]="'Update User'"
+  (formClosed)="formModal.hide()"
+  >
+</app-user-form>
+</app-modal>
+

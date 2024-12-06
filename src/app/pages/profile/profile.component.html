@@ -1,0 +1,65 @@
+<!-- Modal de confirmación para eliminar la cuenta -->
+<app-modal #deleteAccountModal>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Are you sure you want to delete your account?</h2>
+        </div>
+        <div class="modal-body">
+          <h4>This action cannot be undone.</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="deleteAccount()">Yes, delete my account</button>
+          <button type="button" class="btn btn-secondary" (click)="deleteAccountModal.hide()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </app-modal>
+
+<!-- Formulario de Información Personal -->
+<form class="row g-3" style="max-width: 50%; margin: auto;">
+    <div class="d-flex align-items-center">
+        <img src="assets/icons/coffee.png" alt="Profile" class="rounded-circle me-3 mb-4" style="width: 50px; height: 50px;">
+        <h1 class="profile-title text-white mb-4"><b>Personal Information</b></h1>
+    </div>
+    <div class="col-md-4">
+        <label for="nameInput" class="form-label text-white"><b>Name</b></label>
+        <input type="text" class="form-control form-control-lg" id="nameInput" placeholder="{{profileService.user$().name}}" style="font-size: 1rem;">
+    </div>
+    <div class="col-md-4">
+        <label for="lastNameInput" class="form-label text-white"><b>Last name</b></label>
+        <input type="text" class="form-control form-control-lg" id="lastNameInput" placeholder="{{profileService.user$().lastname}}" style="font-size: 1rem;">
+    </div>
+    <div class="col-md-4">
+        <label for="emailInput" class="form-label text-white"><b>Email</b></label>
+        <input type="email" class="form-control form-control-lg" id="emailInput" placeholder="{{profileService.user$().email}}" style="font-size: 1rem;">
+    </div>
+    <div class="col-12">
+        <button type="button" class="btn bg-purple btn-lg w-100 mb-3" (click)="updateModal.show()">
+            Update Information
+        </button>
+    </div>
+    <h4 class="text-white"><b>Account Settings</b></h4>
+    <div class="col-12">
+        <button type="button" class="btn bg-purple btn-lg w-100 mb-3" (click)="updatePasswordModal.show()">
+            Update Password
+        </button>
+    </div>
+    <div class="col-12">
+        <button type="button" class="btn btn-danger btn-lg w-100" (click)="deleteAccountModal.show()">Delete Account</button>
+    </div>
+</form>
+
+<app-modal #updateModal>
+    <app-profile-form
+        [userPreview] = "profileService.user$()"
+      (callParentEvent)="handleFormAction($event)" 
+    />
+</app-modal>
+
+<app-modal #updatePasswordModal>
+    <app-update-password
+        [userPreview] = "profileService.user$()"
+      (callParentEvent)="handlePasswordUpdateAction($event)" 
+    />
+</app-modal>

@@ -1,0 +1,45 @@
+<div class="container mt-5">
+  <div class="row">
+    <!-- Card 1 -->
+    <!-- Cambiado de col-md-2 a col-6 col-md-2 -->
+    <div class="col-6 col-md-2 mb-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fa-solid fa-user card-icon"></i>
+          <span class="card-text">{{userCounter}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <!-- Cambiado de col-md-2 a col-6 col-md-2 -->
+    <div class="col-6 col-md-2 mb-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="fa-solid fa-film card-icon"></i>
+          <span class="card-text">{{movieCounter}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <!-- Cambiado de col-md-6 a col-12 col-md-6 -->
+    <div class="col-12 col-md-6 mb-3">
+      <div class="card p-4">
+        <!-- Agregado class="chart" -->
+        <echarts [options]="chartOptions" class="chart"></echarts>
+      </div>
+    </div>
+
+    <!-- Cambiado de col-md-6 a col-12 col-md-6 -->
+    <div class="col-12 col-md-6 mb-3">
+      <div class="card p-4">
+        <!-- Agregado class="chart" -->
+        <echarts [options]="pieChartOptions" class="chart"></echarts>
+      </div>
+    </div>
+  </div>
+</div>

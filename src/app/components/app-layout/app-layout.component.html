@@ -1,0 +1,52 @@
+<div class="ltr">
+  <div class="page-wrapper compact-wrapper">
+    <app-topbar></app-topbar>
+
+    <div class="page-body-wrapper">
+      <div
+        class="sidebar-wrapper"
+        sidebar-layout="default-sidebar"
+        icon="stroke-svg"
+        [ngClass]="{ close_icon: !layoutService.sidebarOpen }"
+        style="box-shadow: -20px 0 70px 0 rgba(97, 0, 194, 1);"
+      >
+        <app-sidebar></app-sidebar>
+      </div>
+
+      <div class="page-body" style="background-color: #21201E;">
+        <!-- <div class="container-fluid">
+          <div class="page-title">
+            <div class="row">
+              <div class="col-6">
+                <h3>{{ title }}</h3>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <!-- <h3>{{ title }}</h3> -->
+
+        <main class="container-fluid">
+          <router-outlet></router-outlet>
+        </main>
+      </div>
+
+      <footer class="footer" style="background-color: #21201E;">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12 footer-copyright text-center">
+              <a href="https://streamingo2024.github.io/index.html" style="color: #fff">Code&Go</a>
+              <p class="mb-0" style="color: #fff">
+                Copyright 2024 &copy; gbs. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<!-- <div
+  class="bg-overlay"
+  [ngClass]="{ active: layoutService.sidebarOpen }"
+></div> -->

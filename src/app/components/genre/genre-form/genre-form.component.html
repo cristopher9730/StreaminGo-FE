@@ -1,0 +1,32 @@
+<form (ngSubmit)="callEvent(frm)" autocomplete="off" #frm="ngForm" class="container">
+  <div class="mb-3">
+    <h2>{{ action }}</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input #name="ngModel" maxlength="100" type="text" class="form-control" id="name" name="name" 
+        placeholder="Name"
+        [(ngModel)]="genre.name" 
+        [ngClass]="{ 
+          'is-invalid': name.invalid && name.touched,
+          'is-valid': name.valid && name.touched
+        }" 
+        required 
+      />
+      @if (name.invalid) {
+        <div *ngIf="name.invalid" class="invalid-feedback">
+          Please add a valid name
+        </div>
+      }
+    </div>
+    <div class="col-md-6 mb-3 d-flex align-items-end">
+      <button type="submit" class="btn bg-purple d-flex align-items-center">
+        <i class="fa-solid white me-2"
+        [ngClass]="{'fa-plus': action == 'Add genre', 'fa-pencil':  action == 'Update genre'}"
+      ></i>
+      <p class="mb-0">{{ action }}</p>
+      </button>
+    </div>
+  </div>
+</form>

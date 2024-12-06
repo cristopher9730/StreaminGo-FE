@@ -1,0 +1,42 @@
+@use "../../../app.component.scss";
+
+.header-container {
+    //display: flex;
+    //justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .user-count {
+    margin: 0;
+  }
+
+  .user-count p{
+    color: white;
+  }
+
+  .search-container {
+    max-width: 400px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 3%;
+    margin-right: 55%;
+  }
+  
+  .search-input {
+    background-color: #21201E;;
+    color: white;
+    border: none; 
+    border: 2px solid #ccc; 
+    padding: 0.5rem;
+    border-radius: 0.25rem; 
+  
+    ::placeholder {
+      color: #ccc;
+    }
+  
+    &:focus {
+      border-bottom-color: #999; 
+      outline: none; 
+    }
+  }

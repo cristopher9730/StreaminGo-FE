@@ -1,0 +1,75 @@
+<div class="login-container">
+  <div class="d-flex align-items-center justify-content-center h-100 flex-column">
+    <div class="logo-container text-center">
+      <a class="logo" routerLink="/">
+        <img
+          class="logo-img img-fluid mb-4"
+          src="../../../../assets/icons/logo.png"
+          alt="Logo"
+        />
+      </a>
+    </div>
+    <div class="login-card">
+      <div class="w-100">
+        <div class="login-main">
+          <form (ngSubmit)="handleSignup($event)" autocomplete="off" #frm="ngForm">
+            <div class="form-group row">
+              <div class="col-12 col-md-6 px-1">
+                <label for="name" class="form-label mb-2">Name</label>
+                <input #name="ngModel" maxlength="50" type="text" class="form-control" id="name" name="name" placeholder="Enter your name" [(ngModel)]="user.name" [ngClass]="{'is-invalid': name.invalid && name.touched, 'is-valid': name.valid && name.touched}" required />
+                <div *ngIf="name.invalid" class="invalid-feedback">Please add a valid value</div>
+              </div>
+              <div class="col-12 col-md-6 px-1">
+                <label for="lastname" class="form-label mb-2">Last name</label>
+                <input #lastname="ngModel" maxlength="100" type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your last name" [(ngModel)]="user.lastname" [ngClass]="{'is-invalid': lastname.invalid && lastname.touched, 'is-valid': lastname.valid && lastname.touched}" required />
+                <div *ngIf="lastname.invalid && lastname.touched" class="invalid-feedback">Please add a valid value</div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-12 px-1">
+                <label for="email" class="form-label mb-2">Email</label>
+                <input #email="ngModel" maxlength="200" type="email" class="form-control" id="email" name="email" placeholder="Enter your email"
+                  [(ngModel)]="user.email"
+                  [ngClass]="{'is-invalid': email.invalid && email.touched, 'is-valid': email.valid && email.touched}" required
+                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                <div *ngIf="email.invalid && email.touched" class="invalid-feedback">Please enter a valid email.</div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-12 col-md-6 px-1">
+                <label for="password" class="form-label mb-2">Password</label>
+                <input #password="ngModel" type="password" class="form-control" id="password" name="password"
+                  placeholder="Enter your password" [(ngModel)]="user.password"
+                  [ngClass]="{'is-invalid': password.invalid && password.touched, 'is-valid': password.valid && password.touched}"
+                  minlength="8" maxlength="50"
+                  pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$"
+                  required 
+                />
+              </div>
+              <div class="col-12 col-md-6 px-1">
+                <label for="passwordConfirmation" class="form-label mb-2">Confirmation</label>
+                <input #passwordConfirmation="ngModel" type="password" class="form-control" id="passwordConfirmation"
+                  name="passwordConfirmation" placeholder="Confirm password" [(ngModel)]="user.passwordConfirmation"
+                  [ngClass]="{'is-invalid': passwordConfirmation.invalid && passwordConfirmation.touched, 'is-valid': passwordConfirmation.valid && passwordConfirmation.touched}"
+                  required />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-12 px-1 d-flex justify-content-center">
+                <button class="btn btn-primary btn-block login-btn" type="submit">Sign up</button>
+              </div>
+              <div class="col-12 px-1 d-flex flex-column align-items-center mt-3">
+                <p class="m-0">Have an account? <a href="/login" class="link-login">Login</a></p>
+                <a style="color: #FFF;" href="https://streamingo2024.github.io/index.html">Code&Go</a>
+              </div>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

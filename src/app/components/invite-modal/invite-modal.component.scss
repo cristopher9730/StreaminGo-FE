@@ -1,0 +1,23 @@
+.invitelink-container{
+    padding: 25px;
+    
+    .container {
+    
+        display: flex;
+    
+        .copy-button{
+            
+            width: 25%;
+
+            button{
+                color: white;
+                background-color: #7900C2;
+                border: #7900C2;
+            }
+        }
+    
+        .session-info{
+            width: 75%;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+<div class="invitelink-container"> 
+    <div class="title">
+        <h1>Use this link to invite your friends</h1>
+    </div>
+    
+    <div class="container">
+        <div class="session-info">
+            <input type="text" class="form-control" [value] = "currentUrl" readonly>
+        </div>
+        <div class="copy-button">
+            <button class="form-control" (click) = "copyToClipboard()">Copy</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,140 @@
+.card {
+  width: 18rem;
+  height: 24rem;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: 0.2s linear;
+  border: none !important;
+}
+
+.card:hover{
+  transform: scaleX(1.3) scaleY(1.3);
+  z-index: 5;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn-outline-secondary {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-outline-secondary .fa-heart {
+  color: #6f42c1;
+}
+
+.play-button .btn-primary {
+  background-color: rgba(111, 66, 193, 0.9);
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.play-button .btn-primary:hover {
+  background-color: #6100C2;
+  color: #fff;
+}
+
+.play-button .btn-primary .bi-play-fill {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.card-body-overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 0.5rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.btn-info {
+  border: none; 
+  padding: 0.5rem 0.75rem;
+  color: #6100C2; 
+  border-radius: 50%;
+  font-size: 1.25rem; 
+  transition: background-color 0.3s ease;
+}
+
+.btn-info:hover {
+  background-color: #7900C2; 
+}
+
+.fa-circle-exclamation {
+  font-size: 2rem;
+  color: white;
+}
+
+.movie-modal-container {
+  background-color: #21201E;
+  border: none !important;
+  color: #fff;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.bg-image-container {
+  position: relative;
+  width: 100%;
+  height: 400px; /* Adjust height as needed */
+  display: flex;
+  justify-content: right;
+}
+
+.bg-image-container img {
+  position: absolute;
+  height: 100%;
+  object-fit: cover;
+  display: block; /* Remove extra space below the image */
+  box-shadow: -10px 0px 15px rgba(211, 3, 238, 0.5); 
+  z-index: 1; /* Ensure the image is behind the overlay */
+}
+
+.btn-close {
+  position: absolute;
+  top: 1rem; 
+  right: 1rem; 
+  border: none;
+}
+
+.btn-close::before {
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.content-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3; 
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.movie-title {
+  font-size: 30px;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+  .movie-title {
+      font-size: 1.25rem;
+  }
+}

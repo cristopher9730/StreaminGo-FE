@@ -1,0 +1,83 @@
+<form (ngSubmit)="callEvent(frm)" autocomplete="off" #frm="ngForm" class="container">
+  <div class="mb-3">
+    <h2>{{ action }}</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input #name="ngModel" maxlength="50" type="text" class="form-control" id="name" name="name"
+        placeholder="Name"
+        [(ngModel)]="actor.name"
+        [ngClass]="{
+          'is-invalid': name.invalid && name.touched,
+          'is-valid': name.valid && name.touched
+        }"
+        required
+      />
+      @if (name.invalid) {
+        <div *ngIf="name.invalid" class="invalid-feedback">
+          Please add a valid name
+        </div>
+      }
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="lastname" class="form-label">Lastname</label>
+      <input #lastname="ngModel" maxlength="150" type="text" class="form-control" id="lastname" name="lastname"
+        placeholder="Lastname"
+        [(ngModel)]="actor.lastname"
+        [ngClass]="{
+          'is-invalid': lastname.invalid && lastname.touched,
+          'is-valid': lastname.valid && lastname.touched
+        }"
+        required
+      />
+      @if (lastname.invalid) {
+        <div *ngIf="lastname.invalid" class="invalid-feedback">
+          Please add a valid lastname
+        </div>
+      }
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="nationality" class="form-label">Actor Nationality</label>
+      <input #nationality="ngModel" maxlength="50" type="text" class="form-control" id="nationality" name="nationality"
+        placeholder="Actor Nationality"
+        [(ngModel)]="actor.nationality"
+        [ngClass]="{
+          'is-invalid': nationality.invalid && nationality.touched,
+          'is-valid': nationality.valid && nationality.touched
+        }"
+        required
+      />
+      @if (nationality.invalid) {
+        <div *ngIf="nationality.invalid" class="invalid-feedback">
+          Please add a valid nationality
+        </div>
+      }
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="birth" class="form-label">Birth Date</label>
+      <input #birth="ngModel" type="date" class="form-control" id="birth" name="birth"
+        [(ngModel)]="birthString"
+        (ngModelChange)="onBirthChange($event)"
+        [ngClass]="{
+          'is-invalid': birth.invalid && birth.touched,
+          'is-valid': birth.valid && birth.touched
+        }"
+        required
+      />
+      @if (birth.invalid) {
+        <div *ngIf="birth.invalid" class="invalid-feedback">
+          Please add a valid birth date
+        </div>
+      }
+    </div>
+    <div class="col-md-6 mb-3">
+      <button type="submit" class="btn bg-purple d-flex align-items-center">
+        <i class="fa-solid white me-2"
+        [ngClass]="{'fa-plus': action == 'Add actor', 'fa-pencil':  action == 'Update actor'}"
+      ></i>
+      <p class="mb-0">{{ action }}</p>
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,147 @@
+<div class="container-fluid p-0">
+
+  <div [ngClass]="{'hidden': !isPaused}" class="button-container m-4">
+    <button class="btn close-movie"><a (click)="cerrarSala()"><i class="fa-solid fa-x"></i></a></button>
+    <button [ngClass]="{'hidden': isInvite}" class="btn bg-purple m-2" type="button" (click)="inviteModal.show()"><i class="fa fa-user-group"></i>
+      Invite</button>
+    <button class="btn bg-purple m-2" *ngIf="usuarioLogeado && isHidden " (click)="isHidden = false; isExpanded  = false; reiniciarContador()" type="button"><i
+        class="fa fa-sms"></i> Chat<span *ngIf="nuevoMensajeRecibido" class="notificacion">{{ mensajesNuevos }}</span></button>
+  </div>
+
+  <div class="row">
+    <div class="col-md-9" [ngStyle]="{'width': isExpanded ? '100%' : '75%'}">
+
+      <video #video id="video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"
+        [attr.data-setup]="{}">
+        <source [src]="videoSrc" type="video/mp4" />
+        <track id="track" kind="subtitles" src="" srclang="en" label="English" default />
+      </video>
+
+      <!-- Floating Emoji Display -->
+      <div class="floating-emojis">
+        <div *ngFor="let floatingEmoji of floatingEmojis" class="floating-emoji"
+          [ngStyle]="{'left': floatingEmoji.left, 'top': floatingEmoji.top}">
+          {{ floatingEmoji.icon }}
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-3" [ngClass]="{'hidden': isHidden}">
+      <div class="card">
+        <div class="card-header rounded-0 text-white d-flex justify-content-between">
+          <div>
+            <a class="text-decoration-none" (click)="isHidden = true; isExpanded  = true; reiniciarContador()">
+              <i style="font-size: 24px;" class="fa-solid fa-x"></i></a>
+          </div>
+          <div class="text-end">
+            <!-- Icon 2 -->
+            <a [ngClass]="{'hidden': isInvite}" (click)="inviteModal.show()" class="text-decoration-none p-2">
+              <img src="../../../assets/img/add.png" alt="Image 1" class="img-fluid" style="width: 24px;">
+            </a>
+            <!-- Icon 1 -->
+            <a [ngClass]="{'hidden': isInvite}" (click)="cerrarSala()" class="text-decoration-none">
+              <img src="../../../assets/img/salir.png" alt="Image 1" class="img-fluid" style="width: 20px;">
+            </a>
+
+          </div>
+        </div>
+        <div class="card-body p-4 bg-theme-gray">
+          <!-- Chat Messages -->
+          <div class="chat-messages" #messagesContainer>
+            <div *ngFor="let message of messages" class="d-flex mb-3"
+              [ngClass]="{'flex-row-reverse': message.sender === 'me'}">
+              <!-- AVATAR -->
+              <!-- <div class="flex-shrink-0">
+                <img src="https://via.placeholder.com/40" alt="User" class="rounded-circle">
+              </div> -->
+              <div class="flex-grow-1 ms-3 text-white">
+                <div class="bg-purple p-3 rounded-3 text-white" [ngClass]="{'bg-purple text-white': message.sender === 'me'}">
+                  <strong>{{message.sender}}: </strong>
+                  <!-- Display text message or GIF -->
+                  <span class="text-white" *ngIf="!message.isGif">{{message.text}}</span>
+                  <img *ngIf="message.isGif" [src]="message.gifUrl" alt="GIF" class="chat-gif" />
+                  <!-- Time message -->
+                  <div class="message-time">
+                    {{ message.timestamp | date:'shortTime' }}
+                  </div>
+                  <!-- Display reactions -->
+                  <div class="reactions">
+                    <span *ngFor="let reaction of message.reactions" class="reaction-icon">
+                      {{ reaction }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer rounded-0 bg-theme-gray">
+
+          <div class="input-group">
+            <!-- Emoji Button -->
+            <button class="btn bg-purple me-1 rounded-2" (click)="toggleEmojiPicker()">
+              <i class="fas fa-smile"></i>
+            </button>
+
+            <!-- GIF Button -->
+            <button class="btn bg-purple me-1 rounded-2" (click)="toggleGifPicker()">
+              <img class="gif-icon" src="../../../assets/img/gif.png" alt="gif-icon">
+            </button>
+
+            <!-- Emoji Picker Component -->
+            <emoji-mart *ngIf="isEmojiPickerVisible" (emojiSelect)="onEmojiSelected($event)"
+              class="emoji-picker-container"></emoji-mart>
+
+            <!-- GIF Picker Panel -->
+            <div *ngIf="showGifPicker" class="gif-picker">
+              <input [(ngModel)]="gifQuery" (keyup.enter)="searchGifs(gifQuery)" placeholder="Search GIFs"
+                class="form-control mb-2" />
+              <div *ngIf="gifs.length" class="gif-container">
+                <div *ngFor="let gif of gifs" (click)="selectGif(gif)">
+                  <img [src]="gif.images.fixed_height.url" alt="GIF" class="gif-thumbnail" />
+                </div>
+              </div>
+              <p *ngIf="!gifs.length">No GIFs found.</p>
+            </div>
+
+            <!-- Reactions Bar-->
+            <div class="reactions">
+              <div class="reaction-picker">
+                <div class="reaction-grid">
+                  <div *ngFor="let reaction of customReactions" class="reaction-item"
+                    (click)="addReaction(reaction.icon)">
+                    {{ reaction.icon }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Message Input -->
+            <input type="text" class="form-control text-white bg-theme-gray border-0 custom-focus-input"
+              placeholder="Type a message" [(ngModel)]="newMessage">
+
+            <!-- Send Button -->
+            <button class="btn bg-purple rounded-2" (click)="sendMessage()">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<app-modal #inviteModal>
+  <app-invite-modal [sessionCode]="sessionCode"  />
+</app-modal>
+
+<app-modal #exitModal>
+  <div style="text-align: center;">
+    <h1>The host has closed the room</h1>
+  </div>
+  <div class="d-flex justify-content-center">
+    <button (click)="volverDashboard()" class="btn bg-purple rounded-2">Ok</button>
+  </div>
+</app-modal>

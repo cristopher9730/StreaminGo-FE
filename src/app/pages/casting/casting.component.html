@@ -1,0 +1,32 @@
+<div class="container-fluid text-white">
+    <div>
+      <h2>Cast</h2>
+    </div>
+    <div>
+      @defer {
+        <div class="d-flex justify-content-end pb-2">
+          <button
+            (click)="addModal.show()" 
+            type="button" 
+            class="btn bg-purple d-flex align-items-center">
+            <i class="fa-solid fa-plus white"></i>
+            <p class="mb-0"> Add cast</p>
+          </button>
+        </div>
+        <app-casting-list
+        [areActionsAvailable]="areActionsAvailable"
+        [itemList]="castingService.items$()"
+        />
+      } @loading (after 100ms; minimum 1s){
+        <app-loader></app-loader>
+      }
+    </div>
+  </div>
+  
+  <app-modal #addModal>
+    <app-casting-form
+      [action]="'Add casting'"
+      [actorList]="actorService.items$()"
+      (callParentEvent)="handleFormAction($event)" 
+    />
+  </app-modal>

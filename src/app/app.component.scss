@@ -1,0 +1,48 @@
+
+table {
+    border-collapse: collapse !important; 
+  
+    th, td {
+      border: none !important;
+    }
+  
+    tr {
+      border: none !important; 
+    }
+  
+    th, td {
+      padding: 8px !important; 
+    }
+  
+    thead, tbody {
+      border: none !important; 
+    }
+  
+    table, th, td {
+      box-shadow: none !important; 
+    }
+}
+
+.custom-green-btn {
+    background-color: #EBF9F1 !important;
+    color: #1F9254 !important;
+    border-radius: 22px !important;
+    border: none !important;
+    padding: 8px 12px
+}
+
+.custom-green-btn:hover {
+    background-color: #d1f0e0 !important; 
+}
+
+.custom-red-btn {
+    background-color: #FBE7E8 !important;
+    color: #A30D11 !important;
+    border-radius: 22px !important;
+    border: none !important;
+    padding: 8px 12px
+}
+
+.custom-red-btn:hover {
+    background-color: #F3C2C4!important; 
+}

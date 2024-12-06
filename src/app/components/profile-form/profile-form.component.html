@@ -1,0 +1,49 @@
+<div class="update-info">
+  <h1>Update information</h1>
+</div>
+
+
+<div class="form-container">
+
+  <div class="titles">
+    <h3>Name</h3>
+  </div>
+  <input 
+    #name="ngModel" 
+    type="text" 
+    maxlength="50"
+    class="form-control" 
+    id="name" 
+    name="name" 
+    [placeholder]="userPreview.name"
+    [(ngModel)]="user.name" 
+    [ngClass]= "{ 
+      'is-invalid': name.invalid && name.touched,
+      'is-valid': name.valid && name.touched
+      }" 
+    required />
+  
+    <div class="titles">
+      <h3>Lastname</h3>
+    </div>
+  
+  
+  <input 
+    #lastname="ngModel" 
+    type="text" 
+    class="form-control" 
+    maxlength="150"
+    id="lastname" 
+    name="lastname" 
+    [placeholder] = "userPreview.lastname"
+    [(ngModel)]="user.lastname" 
+    [ngClass]="{ 
+      'is-invalid': lastname.invalid && lastname.touched,
+      'is-valid': lastname.valid && lastname.touched
+      }" 
+    required />
+
+  <button (click)="callEvent();" type="button" class="btn btn-primary d-flex align-items-center">
+    <p class="mb-0"> Update information </p>
+  </button>
+</div>

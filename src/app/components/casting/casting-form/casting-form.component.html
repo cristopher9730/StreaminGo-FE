@@ -1,0 +1,45 @@
+<form [formGroup]="castingForm" class="container" (ngSubmit)="callEvent()">
+  <div>
+    <h2>{{ action }}</h2>
+  </div>
+  <div class="row">
+    <div class="col-12 mb-2">
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        maxlength="150"
+        formControlName="name"
+        placeholder="Name"
+        [ngClass]="{
+          'is-invalid': castingForm.get('name')?.invalid && castingForm.get('name')?.touched,
+          'is-valid': castingForm.get('name')?.valid && castingForm.get('name')?.touched
+        }"
+      />
+      <div *ngIf="castingForm.get('name')?.invalid && castingForm.get('name')?.touched" class="invalid-feedback">
+        Please add a valid name
+      </div>
+    </div>
+    <div class="col-12 mb-2">
+      <mat-form-field appearance="fill" class="w-100 p-0">
+        <mat-label>Choose actors</mat-label>
+        <mat-select formControlName="selectedActors" multiple>
+          <mat-option *ngFor="let actor of actorList" [value]="actor.id" class="show-up">
+            {{ actor.name + ' ' + actor.lastname }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="castingForm.get('selectedActors')?.hasError('required') && castingForm.get('selectedActors')?.touched">
+          You must select at least one actor.
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <button type="submit" class="btn bg-purple d-flex align-items-center">
+        <i class="fa-solid white me-2"
+        [ngClass]="{'fa-plus': action == 'Add casting', 'fa-pencil':  action == 'Update casting'}"
+      ></i>
+      <p class="mb-0">{{ action }}</p>
+      </button>
+    </div>
+  </div>
+</form>

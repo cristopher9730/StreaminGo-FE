@@ -1,0 +1,31 @@
+<div class="container-fluid text-white">
+  <div>
+    <h2>Genres</h2>
+  </div>
+  <div>
+    @defer {
+      <div class="d-flex justify-content-end pb-2">
+        <button
+          (click)="addModal.show()" 
+          type="button" 
+          class="btn bg-purple d-flex align-items-center">
+          <i class="fa-solid fa-plus white"></i>
+          <p class="mb-0"> Add genre</p>
+        </button>
+      </div>
+      <app-genre-list
+      [areActionsAvailable]="areActionsAvailable"
+      [itemList]="genreService.items$()"
+      />
+    } @loading (after 100ms; minimum 1s){
+      <app-loader></app-loader>
+    }
+  </div>
+</div>
+
+<app-modal #addModal>
+  <app-genre-form
+    [action]="'Add genre'"
+    (callParentEvent)="handleFormAction($event)" 
+  />
+</app-modal>

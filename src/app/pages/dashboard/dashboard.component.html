@@ -1,0 +1,68 @@
+<!-- Ícono de búsqueda -->
+<a [routerLink]="['/search-dashboard-movies']" class="btn btn-search">
+  <b>Search </b> <i class="fa-solid fa-magnifying-glass text-white"></i>
+</a>
+<!-- Carousel Video -->
+<div id="videoCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+  <div class="carousel-inner">
+    <!-- Slides -->
+    <div *ngFor="let item of filteredMovieList; let i = index" class="carousel-item" [class.active]="i === 0" (mouseenter)="playVideo(i)" (mouseleave)="pauseAll(i)" >
+      <div class="stream-home-video">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <video #playOnHover class="play-on-hover" style="height: 80vh;" muted loop >
+          <source [src]="'http://localhost:8080/stream/video?title=' + item.video" type="video/mp4" />
+        </video>
+        <div class="carousel-caption d-flex align-items-center justify-content-start">
+          <div class="text-start p-4">
+            <img src="assets/icons/logo.png" alt="">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item['description'] }}</p>
+            <a class="btn bg-purple m-2" [href]="'/stream/' + item.video">
+              <i class="bi bi-play-fill" style="color: black; padding: 0%;"></i> Watch Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Carousel Video end -->
+
+<!-- slider -->
+<div class="slider-box">
+  <div class="container-fluid slider">
+    <section class="d-flex justify-content-between margin-right">
+      <h2 class="text-white"><b>Trending</b></h2>
+    </section>
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+      <div class="carousel-inner" style="position: relative; overflow: visible;">
+        <div class="carousel-item active">
+          <section class="d-flex">
+            @for (item of trendingMovies; track item.id){
+            <app-movie-card [title]="item.name ?? ''" [year]="item.realesedYear ?? 0"
+              [category]="item.genre?.name ?? ''" [url]="'/stream'" [image]="item.imageCover ?? ''"
+              [video]="item.video ?? ''" [description]="item.description ?? ''" [casting]="item.casting"
+              [time]="item.duration" [movieId]="item.id ?? 1">
+            </app-movie-card>
+            }
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- slider - end -->
+
+  <!-- All Movies -->
+  <h2 class="text-white"><b>Watch Movies Now</b></h2>
+  <div class="container d-flex flex-wrap m-0 w-100" style="max-width: 100%;">
+    @for (item of movieList; track item.id){
+      <app-movie-card [title]="item.name ?? ''" [year]="item.realesedYear ?? 0"
+      [category]="item.genre?.name ?? ''" [url]="'/stream'" [image]="item.imageCover ?? ''"
+      [video]="item.video ?? ''" [description]="item.description ?? ''" [casting]="item.casting"
+      [time]="item.duration" [movieId]="item.id ?? 1">
+    </app-movie-card>
+    }
+
+  </div>
+</div>

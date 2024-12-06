@@ -1,0 +1,151 @@
+<form (ngSubmit)="callEvent(frm)" autocomplete="off" #frm="ngForm" class="container">
+  <div class="mb-3">
+    <h2>{{ action }}</h2>
+  </div>
+  <div class="row">
+    <!-- Image Upload -->
+    <div class="col-md-6 mb-3">
+      <label for="imageUpload" class="form-label">Upload Image</label>
+      <input type="file" class="form-control" id="imageUpload" (change)="onImageUpload($event)" required />
+      <div *ngIf="frm.submitted && !movie.imageCover" class="invalid-feedback d-block">
+        Please upload an image
+      </div>
+    </div>
+    <!-- Video Upload -->
+    <div class="col-md-6 mb-3">
+      <label for="videoUpload" class="form-label">Upload Video</label>
+      <input type="file" class="form-control" id="videoUpload" (change)="onVideoUpload($event)" required />
+      <div *ngIf="frm.submitted && !movie.video" class="invalid-feedback d-block">
+        Please upload a video
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input #name="ngModel" maxlength="100" type="text" class="form-control" id="name" name="name" placeholder="Name"
+        [(ngModel)]="movie.name"
+        [ngClass]="{
+          'is-invalid': name.invalid && name.touched,
+          'is-valid': name.valid && name.touched
+        }"
+        required />
+      <div *ngIf="name.invalid && name.touched" class="invalid-feedback">
+        Please add a valid name
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input #description="ngModel" maxlength="250" type="text" class="form-control" id="description" name="description" placeholder="Description"
+        [(ngModel)]="movie.description"
+        [ngClass]="{
+          'is-invalid': description.invalid && description.touched,
+          'is-valid': description.valid && description.touched
+        }"
+        required />
+      <div *ngIf="description.invalid && description.touched" class="invalid-feedback">
+        Please add a valid description
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="year" class="form-label">Year</label>
+      <input #year="ngModel" type="number" min="1895" max="2024" class="form-control" id="year" name="year" placeholder="Year"
+        [(ngModel)]="movie.realesedYear"
+        [ngClass]="{
+          'is-invalid': year.invalid && year.touched,
+          'is-valid': year.valid && year.touched
+        }"
+        (input)="validateYear($event)"
+        required />
+      <div *ngIf="year.invalid && year.touched" class="invalid-feedback">
+        Please add a valid year
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="time" class="form-label">Duration (min)</label>
+      <input #time="ngModel" type="number" min="1" max="1440" class="form-control" id="time" name="time" placeholder="Duration (min)"
+        [(ngModel)]="movie.duration"
+        [ngClass]="{
+          'is-invalid': time.invalid && time.touched,
+          'is-valid': time.valid && time.touched
+        }"
+        (input)="validateDuration($event)"
+        required />
+      <div *ngIf="time.invalid && time.touched" class="invalid-feedback">
+        Please add a valid duration
+      </div>
+    </div>
+
+
+    <div class="col-12 mb-3">
+      <label for="genreSearch" class="form-label">Genre</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        id="genre" 
+        name="genre"
+        [(ngModel)]="selectedGenreName"
+        (input)="filterGenres($event)"
+        (focus)="showOptionsGenre()"
+        (blur)="hideOptionsGenre()"
+        [ngClass]="{
+          'is-invalid': genre.invalid && genre.touched,
+          'is-valid': genre.valid && genre.touched
+        }"
+        required
+        placeholder="Search genre"
+        #genre="ngModel">
+      <div *ngIf="genre.invalid && genre.touched" class="invalid-feedback">
+        Please select a valid genre
+      </div>
+      <div class="position-relative">
+        <ul class="list-group position-absolute w-100 mt-1" *ngIf="showOptionsListGenre && filteredGenreList.length > 0">
+          <li *ngFor="let item of filteredGenreList" class="list-group-item list-group-item-action" (mousedown)="selectGenre(item)"  (click)="selectGenre(item)">
+            {{ item.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    
+             
+    <div class="col-12 mb-3">
+      <label for="castingSearch" class="form-label">Casting</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        id="casting" 
+        name="casting"
+        [(ngModel)]="selectedCastingName"
+        (input)="filterCastings($event)"
+        (focus)="showOptionsCasting()"
+        (blur)="hideOptionsCasting()"
+        [ngClass]="{
+          'is-invalid': casting.invalid && casting.touched,
+          'is-valid': casting.valid && casting.touched
+        }"
+        required
+        placeholder="Search casting"
+        #casting="ngModel">
+      <div *ngIf="casting.invalid && casting.touched" class="invalid-feedback">
+        Please select a valid casting
+      </div>
+      <div class="position-relative">
+        <ul class="list-group position-absolute w-100 mt-1" *ngIf="showOptionsListCasting && filteredCastingList.length > 0">
+          <li *ngFor="let item of filteredCastingList" class="list-group-item list-group-item-action" (mousedown)="selectCasting(item)"  (click)="selectCasting(item)">
+            {{ item.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+
+    <div class="col-12 d-flex justify-content-start">
+      <button type="submit" class="btn bg-purple d-flex align-items-center">
+        <i class="fa-solid white me-2"
+        [ngClass]="{'fa-plus': action == 'Add movie', 'fa-pencil':  action == 'Update movie'}"
+      ></i>
+      <p class="mb-0">{{ action }}</p>
+      </button>
+    </div>
+  </div>
+</form>
